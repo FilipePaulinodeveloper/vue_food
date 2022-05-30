@@ -1,10 +1,20 @@
+require('./bootstrap')
+require('./plugins/index')
 import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
+import BaseTemplate from './layouts/Partes/BaseTemplate'
+import router from './routes/index'
+import store from './store'
 
 Vue.config.productionTip = false
 
+Vue.component('preloader-component', () => import('./components/Preloader'))
+
 new Vue({
+  render: h => h(BaseTemplate),
   router,
-  render: h => h(App)
+  store
+ 
 }).$mount('#app')
+
+store.dispatch('getMe')
+
